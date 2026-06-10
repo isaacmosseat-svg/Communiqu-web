@@ -1,9 +1,6 @@
-<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/svg+xml" href="/favicon.svg"><meta name="generator" content="Astro v6.4.5"><title>Communiqué | Coming Soon</title><script>
-      // Initial theme setup to prevent flash
+<!DOCTYPE html><html lang="en"> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width"><link rel="icon" type="image/png" href="/assets/favicon-white.png" media="(prefers-color-scheme: dark)"><link rel="icon" type="image/png" href="/assets/favicon-black.png" media="(prefers-color-scheme: light)"><link rel="icon" type="image/png" href="/assets/favicon-white.png"><meta name="generator" content="Astro v6.4.5"><title>Communiqué | Coming Soon</title><script>
+      // Automatically follow system preference
       const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           return 'dark';
         }
@@ -14,6 +11,15 @@
       } else {
         document.documentElement.classList.remove('dark');
       }
+
+      // Listen for changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
     </script><style data-vite-dev-id="/app/src/styles/global.css">/*! tailwindcss v4.3.0 | MIT License | https://tailwindcss.com */
 @layer properties;
 @layer theme, base, components, utilities;
@@ -63,6 +69,8 @@
     --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
+    --font-korolev: "Korolev", sans-serif;
+    --font-newshound: "Newshound", serif;
   }
 }
 @layer base {
@@ -416,8 +424,14 @@
   .text-center {
     text-align: center;
   }
+  .font-korolev {
+    font-family: var(--font-korolev);
+  }
   .font-mono {
     font-family: var(--font-mono);
+  }
+  .font-newshound {
+    font-family: var(--font-newshound);
   }
   .text-2xl {
     font-size: var(--text-2xl);
@@ -730,6 +744,31 @@
     }
   }
 }
+@font-face {
+  font-family: 'Korolev';
+  src: local('Korolev Compressed Heavy'), local('Korolev-Compressed-Heavy'), sans-serif;
+  font-weight: 900;
+  font-stretch: compressed;
+}
+@font-face {
+  font-family: 'Newshound';
+  src: local('Newshound Subhead'), local('Newshound-Subhead'), serif;
+  font-weight: 400;
+}
+:root {
+  font-family: var(--font-newshound);
+}
+.font-korolev {
+  font-family: var(--font-korolev);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+.font-newshound {
+  font-family: var(--font-newshound);
+}
+h1, h2, h3 {
+  font-family: var(--font-korolev);
+}
 @property --tw-rotate-x {
   syntax: "*";
   inherits: false;
@@ -888,19 +927,15 @@
     }
   }
 }
-</style>
-<style data-vite-dev-id="/app/src/layouts/Layout.astro?astro&amp;type=style&amp;index=0&amp;lang.css">html {
-		font-family: system-ui, sans-serif;
-	}</style><script type="module" src="/@vite/client"></script>
+</style><script type="module" src="/@vite/client"></script>
 <script type="module" src="/@id/astro/runtime/client/dev-toolbar/entrypoint.js"></script>
 <script>window.__astro_dev_toolbar__ = {"root":"/app/","version":"6.4.5","debugInfo":"Astro                    v6.4.5\nNode                     v22.22.1\nSystem                   Linux (x64)\nPackage Manager          npm\nOutput                   static\nAdapter                  none\nIntegrations             none"}</script>
-<script type="module" src="/src/styles/global.css"></script>
-<script type="module" src="/src/layouts/Layout.astro?astro&type=style&index=0&lang.css"></script></head> <body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col transition-colors duration-300" data-astro-source-file="/app/src/layouts/Layout.astro" data-astro-source-loc="36:124"> <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black focus:dark:bg-black focus:dark:text-white" data-astro-source-file="/app/src/layouts/Layout.astro" data-astro-source-loc="37:171">Skip to content</a>  <main id="main-content" class="flex-grow flex flex-col items-center justify-center relative px-4 py-20" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="9:106"> <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-lg bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 z-50 border border-gray-300 dark:border-gray-700" aria-label="Toggle light and dark mode" data-astro-source-file="/app/src/components/ThemeToggle.astro" data-astro-source-loc="5:2"> <svg class="light-icon hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-source-file="/app/src/components/ThemeToggle.astro" data-astro-source-loc="6:211"><circle cx="12" cy="12" r="5" data-astro-source-file="/app/src/components/ThemeToggle.astro" data-astro-source-loc="6:211"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" data-astro-source-file="/app/src/components/ThemeToggle.astro" data-astro-source-loc="6:242"></path></svg> <svg class="dark-icon hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-astro-source-file="/app/src/components/ThemeToggle.astro" data-astro-source-loc="7:210"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" data-astro-source-file="/app/src/components/ThemeToggle.astro" data-astro-source-loc="7:210"></path></svg> </button> <script type="module" src="/src/components/ThemeToggle.astro?astro&type=script&index=0&lang.ts"></script> <div class="flex flex-col items-center text-center space-y-12 max-w-4xl" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="12:76"> <div class="relative w-64 md:w-96 transition-all duration-500" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="13:67"> <img src="/assets/logo-black.png" alt="Communiqué Logo" class="dark:hidden w-full h-auto" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="14:6"> <img src="/assets/logo-white.png" alt="Communiqué Logo" class="hidden dark:block w-full h-auto" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="19:6"> </div> <p class="text-xl md:text-2xl italic font-light opacity-90 max-w-2xl" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="26:83">
+<script type="module" src="/src/styles/global.css"></script></head> <body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col transition-colors duration-300 font-newshound" data-astro-source-file="/app/src/layouts/Layout.astro" data-astro-source-loc="44:139"> <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black focus:dark:bg-black focus:dark:text-white" data-astro-source-file="/app/src/layouts/Layout.astro" data-astro-source-loc="45:171">Skip to content</a>  <main id="main-content" class="flex-grow flex flex-col items-center justify-center relative px-4 py-20" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="8:106"> <div class="flex flex-col items-center text-center space-y-12 max-w-4xl" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="10:76"> <div class="relative w-64 md:w-96 transition-all duration-500" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="11:67"> <img src="/assets/logo-black.png" alt="Communiqué Logo" class="dark:hidden w-full h-auto" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="12:6"> <img src="/assets/logo-white.png" alt="Communiqué Logo" class="hidden dark:block w-full h-auto" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="17:6"> </div> <p class="text-xl md:text-2xl italic font-light opacity-90 max-w-2xl" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="24:83">
 "actionable media for our collective story"
-</p> <div class="font-mono text-sm sm:text-base md:text-lg opacity-80 min-h-[5em] max-w-2xl px-4 text-center" data-astro-source-file="/app/src/components/Terminal.astro" data-astro-source-loc="1:106"> <span id="terminal-text" data-astro-source-file="/app/src/components/Terminal.astro" data-astro-source-loc="2:4"></span><span class="animate-pulse" data-astro-source-file="/app/src/components/Terminal.astro" data-astro-source-loc="2:63">_</span> </div> <script type="module" src="/src/components/Terminal.astro?astro&type=script&index=0&lang.ts"></script> <h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="32:93">
-Coming Soon<span class="animate-bounce ml-1" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="33:50">.</span><span class="animate-bounce ml-1 [animation-delay:0.2s]" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="33:115">.</span><span class="animate-bounce ml-1 [animation-delay:0.4s]" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="33:180">.</span> </h1> </div> </main> <div id="privacy" class="max-w-2xl mx-auto px-4 py-20 hidden target:block" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="39:80"> <h2 class="text-2xl font-bold mb-4" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="40:45">Privacy Policy</h2> <p class="mb-4" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="41:25">
+</p> <div class="font-mono text-sm sm:text-base md:text-lg opacity-80 min-h-[5em] max-w-2xl px-4 text-center" data-astro-source-file="/app/src/components/Terminal.astro" data-astro-source-loc="1:106"> <span id="terminal-text" data-astro-source-file="/app/src/components/Terminal.astro" data-astro-source-loc="2:4"></span><span class="animate-pulse" data-astro-source-file="/app/src/components/Terminal.astro" data-astro-source-loc="2:63">_</span> </div> <script type="module" src="/src/components/Terminal.astro?astro&type=script&index=0&lang.ts"></script> <h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline font-korolev" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="30:106">
+Coming Soon<span class="animate-bounce ml-1" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="31:50">.</span><span class="animate-bounce ml-1 [animation-delay:0.2s]" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="31:115">.</span><span class="animate-bounce ml-1 [animation-delay:0.4s]" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="31:180">.</span> </h1> </div> </main> <div id="privacy" class="max-w-2xl mx-auto px-4 py-20 hidden target:block" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="37:80"> <h2 class="text-2xl font-bold mb-4 font-korolev" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="38:58">Privacy Policy</h2> <p class="mb-4" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="39:25">
 Communiqué respects your privacy. This "Coming Soon" page does not use cookies, trackers, or any third-party analytics.
             We do not collect any personal data through this website at this time.
-</p> <p data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="45:12">
+</p> <p data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="43:12">
 When you send us an email, we will only use your contact information to respond to your inquiry.
-</p> <a href="#" class="inline-block mt-8 underline" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="48:57">Back to top</a> </div> <footer class="py-6 px-4 border-t border-gray-100 dark:border-gray-900 w-full text-[10px] sm:text-xs opacity-60" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="1:114"> <div class="max-w-6xl mx-auto flex flex-wrap justify-center items-center gap-x-4 gap-y-2 uppercase tracking-tight text-center" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="2:130"> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="3:11">Communiqué VZW/ASBL</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="4:36">|</span> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="5:11">Rue Locquenghien 41, 1000 Brussels</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="6:36">|</span> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="7:11">CBE 1025.174.291</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="8:36">|</span> <a href="mailto:info@communique.press" class="hover:text-blue-500 transition-colors underline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="9:100">info@communique.press</a> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="10:36">|</span> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="11:11">Donate: BE06 3632 7705 9322</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="12:36">|</span> <a href="#privacy" class="hover:underline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="13:48">Privacy</a> </div> </footer> </body></html>
+</p> <a href="#" class="inline-block mt-8 underline" data-astro-source-file="/app/src/pages/index.astro" data-astro-source-loc="46:57">Back to top</a> </div> <footer class="py-6 px-4 w-full text-[10px] sm:text-xs opacity-60" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="1:68"> <div class="max-w-6xl mx-auto flex flex-wrap justify-center items-center gap-x-4 gap-y-2 uppercase tracking-tight text-center font-newshound" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="2:145"> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="3:11">Communiqué VZW/ASBL</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="4:36">|</span> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="5:11">Rue Locquenghien 41, 1000 Brussels</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="6:36">|</span> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="7:11">CBE 1025.174.291</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="8:36">|</span> <a href="mailto:info@communique.press" class="hover:text-blue-500 transition-colors underline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="9:100">info@communique.press</a> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="10:36">|</span> <span data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="11:11">Donate: BE06 3632 7705 9322</span> <span class="hidden sm:inline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="12:36">|</span> <a href="#privacy" class="hover:underline" data-astro-source-file="/app/src/components/Footer.astro" data-astro-source-loc="13:48">Privacy</a> </div> </footer>  </body></html>

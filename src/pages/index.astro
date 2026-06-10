@@ -1,13 +1,11 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import ThemeToggle from '../components/ThemeToggle.astro';
 import Terminal from '../components/Terminal.astro';
 import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Communiqué | Coming Soon">
 	<main id="main-content" class="flex-grow flex flex-col items-center justify-center relative px-4 py-20">
-		<ThemeToggle />
 
 		<div class="flex flex-col items-center text-center space-y-12 max-w-4xl">
 			<div class="relative w-64 md:w-96 transition-all duration-500">
@@ -29,7 +27,7 @@ import Footer from '../components/Footer.astro';
 
 			<Terminal />
 
-			<h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline">
+			<h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline font-korolev">
 				Coming Soon<span class="animate-bounce ml-1">.</span><span class="animate-bounce ml-1 [animation-delay:0.2s]">.</span><span class="animate-bounce ml-1 [animation-delay:0.4s]">.</span>
 			</h1>
 
@@ -37,7 +35,7 @@ import Footer from '../components/Footer.astro';
 	</main>
 
     <div id="privacy" class="max-w-2xl mx-auto px-4 py-20 hidden target:block">
-        <h2 class="text-2xl font-bold mb-4">Privacy Policy</h2>
+        <h2 class="text-2xl font-bold mb-4 font-korolev">Privacy Policy</h2>
         <p class="mb-4">
             Communiqué respects your privacy. This "Coming Soon" page does not use cookies, trackers, or any third-party analytics.
             We do not collect any personal data through this website at this time.

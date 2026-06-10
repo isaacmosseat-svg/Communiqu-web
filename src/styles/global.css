@@ -1,1 +1,39 @@
 @import "tailwindcss";
+
+@theme {
+  --font-korolev: "Korolev", sans-serif;
+  --font-newshound: "Newshound", serif;
+}
+
+/* Fallback font faces if not provided locally */
+@font-face {
+  font-family: 'Korolev';
+  src: local('Korolev Compressed Heavy'), local('Korolev-Compressed-Heavy'), sans-serif;
+  font-weight: 900;
+  font-stretch: compressed;
+}
+
+@font-face {
+  font-family: 'Newshound';
+  src: local('Newshound Subhead'), local('Newshound-Subhead'), serif;
+  font-weight: 400;
+}
+
+:root {
+  font-family: var(--font-newshound);
+}
+
+.font-korolev {
+  font-family: var(--font-korolev);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.font-newshound {
+  font-family: var(--font-newshound);
+}
+
+/* Ensure headings use Korolev */
+h1, h2, h3 {
+  font-family: var(--font-korolev);
+}

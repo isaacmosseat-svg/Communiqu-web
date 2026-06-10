@@ -12,15 +12,14 @@ const { title } = Astro.props;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/png" href="/assets/favicon-white.png" media="(prefers-color-scheme: dark)" />
+		<link rel="icon" type="image/png" href="/assets/favicon-black.png" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/png" href="/assets/favicon-white.png" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
     <script is:inline>
-      // Initial theme setup to prevent flash
+      // Automatically follow system preference
       const theme = (() => {
-        if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-          return localStorage.getItem('theme');
-        }
         if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
           return 'dark';
         }
@@ -31,16 +30,19 @@ const { title } = Astro.props;
       } else {
         document.documentElement.classList.remove('dark');
       }
+
+      // Listen for changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+        if (e.matches) {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      });
     </script>
 	</head>
-	<body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col transition-colors duration-300">
+	<body class="bg-white dark:bg-black text-black dark:text-white min-h-screen flex flex-col transition-colors duration-300 font-newshound">
 		<a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-4 focus:bg-white focus:text-black focus:dark:bg-black focus:dark:text-white">Skip to content</a>
 		<slot />
 	</body>
 </html>
-
-<style is:global>
-	html {
-		font-family: system-ui, sans-serif;
-	}
-</style>
