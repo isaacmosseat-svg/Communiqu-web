@@ -6,10 +6,10 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout title="Communiqué | Coming Soon">
-	<main id="main-content" class="flex-grow flex flex-col items-center justify-center relative px-4">
+	<main id="main-content" class="flex-grow flex flex-col items-center justify-center relative px-4 py-20">
 		<ThemeToggle />
 
-		<div class="flex flex-col items-center text-center space-y-8 max-w-3xl">
+		<div class="flex flex-col items-center text-center space-y-12 max-w-4xl">
 			<div class="relative w-64 md:w-96 transition-all duration-500">
 				<img
 					src="/assets/logo-black.png"
@@ -23,15 +23,16 @@ import Footer from '../components/Footer.astro';
 				/>
 			</div>
 
-			<h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline">
-				Coming Soon<span class="animate-bounce ml-1">.</span><span class="animate-bounce ml-1 [animation-delay:0.2s]">.</span><span class="animate-bounce ml-1 [animation-delay:0.4s]">.</span>
-			</h1>
-
-			<p class="text-xl md:text-2xl italic font-light opacity-90">
+            <p class="text-xl md:text-2xl italic font-light opacity-90 max-w-2xl">
 				"actionable media for our collective story"
 			</p>
 
 			<Terminal />
+
+			<h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline">
+				Coming Soon<span class="animate-bounce ml-1">.</span><span class="animate-bounce ml-1 [animation-delay:0.2s]">.</span><span class="animate-bounce ml-1 [animation-delay:0.4s]">.</span>
+			</h1>
+
 		</div>
 	</main>
 
@@ -49,7 +50,3 @@ import Footer from '../components/Footer.astro';
 
 	<Footer />
 </Layout>
-
-<style>
-	/* Custom styles if needed */
-</style>

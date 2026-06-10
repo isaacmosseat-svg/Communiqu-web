@@ -1,50 +1,36 @@
 <button
   id="theme-toggle"
-  class="fixed top-4 right-4 p-2 rounded-lg bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-white transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  class="fixed top-4 right-4 p-2 rounded-lg bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-all duration-300 hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-blue-500 z-50 border border-gray-300 dark:border-gray-700"
   aria-label="Toggle light and dark mode"
 >
-  <span class="light-icon hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-  </span>
-  <span class="dark-icon hidden">
-    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-  </span>
+  <svg class="light-icon hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+  <svg class="dark-icon hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
 </button>
 
-<script is:inline>
-  const theme = (() => {
-    if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
-      return localStorage.getItem('theme');
-    }
-    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      return 'dark';
-    }
-    return 'light';
-  })();
+<script>
+  const setupThemeToggle = () => {
+    const toggle = document.getElementById("theme-toggle");
+    if (!toggle) return;
 
-  if (theme === 'light') {
-    document.documentElement.classList.remove('dark');
-  } else {
-    document.documentElement.classList.add('dark');
-  }
+    const updateIcon = () => {
+      const isDark = document.documentElement.classList.contains("dark");
+      document.querySelector('.light-icon')?.classList.toggle('hidden', !isDark);
+      document.querySelector('.dark-icon')?.classList.toggle('hidden', isDark);
+    };
 
-  window.localStorage.setItem('theme', theme);
+    toggle.addEventListener("click", () => {
+      document.documentElement.classList.toggle("dark");
+      const isDark = document.documentElement.classList.contains("dark");
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+      updateIcon();
+    });
 
-  const handleToggleClick = () => {
-    const element = document.documentElement;
-    element.classList.toggle("dark");
-
-    const isDark = element.classList.contains("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
     updateIcon();
   };
 
-  const updateIcon = () => {
-    const isDark = document.documentElement.classList.contains("dark");
-    document.querySelector('.light-icon').classList.toggle('hidden', !isDark);
-    document.querySelector('.dark-icon').classList.toggle('hidden', isDark);
-  };
+  // Run on initial load
+  setupThemeToggle();
 
-  document.getElementById("theme-toggle").addEventListener("click", handleToggleClick);
-  updateIcon();
+  // Run on view transitions if enabled
+  document.addEventListener('astro:after-swap', setupThemeToggle);
 </script>

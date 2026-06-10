@@ -1,9 +1,9 @@
-<div class="font-mono text-sm sm:text-base md:text-lg opacity-80 mt-8 min-h-[4em] max-w-2xl px-4 text-center">
+<div class="font-mono text-sm sm:text-base md:text-lg opacity-80 min-h-[5em] max-w-2xl px-4 text-center">
   <span id="terminal-text"></span><span class="animate-pulse">_</span>
 </div>
 
 <script>
-  const text = "Communiqué is a worker owned media project, built to support social movements and people's struggles intentionally. coming soon.";
+  const text = "Communiqué is a worker owned media project, built to support social movements and people's struggles internationally.";
   const terminalElement = document.getElementById('terminal-text');
   let index = 0;
 
@@ -11,15 +11,17 @@
     if (index < text.length) {
       terminalElement.textContent += text.charAt(index);
       index++;
-      setTimeout(type, 50);
+      setTimeout(type, 40);
     } else {
       setTimeout(() => {
         terminalElement.textContent = "";
         index = 0;
         type();
-      }, 5000); // Wait 5 seconds before looping
+      }, 7000); // Longer wait for readability
     }
   }
 
-  type();
+  if (terminalElement) {
+    type();
+  }
 </script>
