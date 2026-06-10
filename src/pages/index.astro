@@ -1,0 +1,55 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ThemeToggle from '../components/ThemeToggle.astro';
+import Terminal from '../components/Terminal.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Communiqué | Coming Soon">
+	<main id="main-content" class="flex-grow flex flex-col items-center justify-center relative px-4">
+		<ThemeToggle />
+
+		<div class="flex flex-col items-center text-center space-y-8 max-w-3xl">
+			<div class="relative w-64 md:w-96 transition-all duration-500">
+				<img
+					src="/assets/logo-black.png"
+					alt="Communiqué Logo"
+					class="dark:hidden w-full h-auto"
+				/>
+				<img
+					src="/assets/logo-white.png"
+					alt="Communiqué Logo"
+					class="hidden dark:block w-full h-auto"
+				/>
+			</div>
+
+			<h1 class="text-2xl md:text-4xl font-bold tracking-widest uppercase flex items-baseline">
+				Coming Soon<span class="animate-bounce ml-1">.</span><span class="animate-bounce ml-1 [animation-delay:0.2s]">.</span><span class="animate-bounce ml-1 [animation-delay:0.4s]">.</span>
+			</h1>
+
+			<p class="text-xl md:text-2xl italic font-light opacity-90">
+				"actionable media for our collective story"
+			</p>
+
+			<Terminal />
+		</div>
+	</main>
+
+    <div id="privacy" class="max-w-2xl mx-auto px-4 py-20 hidden target:block">
+        <h2 class="text-2xl font-bold mb-4">Privacy Policy</h2>
+        <p class="mb-4">
+            Communiqué respects your privacy. This "Coming Soon" page does not use cookies, trackers, or any third-party analytics.
+            We do not collect any personal data through this website at this time.
+        </p>
+        <p>
+            When you send us an email, we will only use your contact information to respond to your inquiry.
+        </p>
+        <a href="#" class="inline-block mt-8 underline">Back to top</a>
+    </div>
+
+	<Footer />
+</Layout>
+
+<style>
+	/* Custom styles if needed */
+</style>
